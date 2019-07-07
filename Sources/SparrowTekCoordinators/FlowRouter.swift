@@ -101,6 +101,10 @@ final public class FlowRouter: NSObject, FlowRouterType, UINavigationControllerD
     // MARK: UINavigationControllerDelegate
     
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        // This is to help with the back swiping of SwipeNavigationController
+        if let swipeNavController = navigationController as? SwipeNavigationController {
+            swipeNavController.duringPushAnimation = false
+        }
         
         // Ensure the view controller is popping
         guard let poppedViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),

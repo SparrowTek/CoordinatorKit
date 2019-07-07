@@ -12,6 +12,7 @@ public protocol Coordinator: Presentable {
     
     var router: FlowRouterType { get }
     var childCoordinators: [Coordinator] { get set }
+    var index: Int? { get set }
     
     init(router: FlowRouterType)
     func start()
