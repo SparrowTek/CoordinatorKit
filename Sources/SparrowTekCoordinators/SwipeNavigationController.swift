@@ -10,7 +10,7 @@ import UIKit
 
 // This Navigation controller must be used if a custom navigation bar is used
 
-final class SwipeNavigationController: UINavigationController {
+final public class SwipeNavigationController: UINavigationController {
     
     var duringPushAnimation = false
     
