@@ -31,7 +31,7 @@ final public class SwipeNavigationController: UINavigationController {
         interactivePopGestureRecognizer?.delegate = self
     }
     
-    public deinit {
+    deinit {
         delegate = nil
         interactivePopGestureRecognizer?.delegate = nil
     }
