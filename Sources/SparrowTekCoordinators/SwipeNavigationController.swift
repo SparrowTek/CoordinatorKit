@@ -26,7 +26,7 @@ final public class SwipeNavigationController: UINavigationController {
         super.init(coder: aDecoder)
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         interactivePopGestureRecognizer?.delegate = self
     }
@@ -36,7 +36,7 @@ final public class SwipeNavigationController: UINavigationController {
         interactivePopGestureRecognizer?.delegate = nil
     }
     
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+    override public func pushViewController(_ viewController: UIViewController, animated: Bool) {
         duringPushAnimation = true
         
         super.pushViewController(viewController, animated: animated)
@@ -46,7 +46,7 @@ final public class SwipeNavigationController: UINavigationController {
 // MARK: - UIGestureRecognizerDelegate
 
 extension SwipeNavigationController: UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard gestureRecognizer == interactivePopGestureRecognizer else { return true }
         
         // Disable pop gesture in two situations:
