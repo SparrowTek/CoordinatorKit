@@ -14,15 +14,15 @@ final public class SwipeNavigationController: UINavigationController {
     
     var duringPushAnimation = false
     
-    override init(rootViewController: UIViewController) {
+    override public init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -31,7 +31,7 @@ final public class SwipeNavigationController: UINavigationController {
         interactivePopGestureRecognizer?.delegate = self
     }
     
-    deinit {
+    public deinit {
         delegate = nil
         interactivePopGestureRecognizer?.delegate = nil
     }
