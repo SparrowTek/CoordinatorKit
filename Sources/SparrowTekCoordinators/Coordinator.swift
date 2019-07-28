@@ -17,3 +17,24 @@ public protocol Coordinator: Presentable {
     init(router: FlowRouterType)
     func start()
 }
+
+extension Coordinator {
+    public mutating func present(_ coordinator: Coordinator) {
+        var coordinator = coordinator
+        coordinator.index = childCoordinators.count
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+    
+    public mutating func removeChild(_ coordinator: Coordinator?) {
+        guard let coordinator = coordinator else { return }
+        
+        for child in childCoordinators {
+            if child.index == coordinator.index {
+                if let index = coordinator.index {
+                    childCoordinators.remove(at: index)
+                }
+            }
+        }
+    }
+}
