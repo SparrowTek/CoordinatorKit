@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol Coordinator: Presentable {
+public protocol Coordinator: class, Presentable {
     
     var router: FlowRouterType { get }
     var childCoordinators: [Coordinator] { get set }
@@ -19,14 +19,13 @@ public protocol Coordinator: Presentable {
 }
 
 extension Coordinator {
-    public mutating func present(_ coordinator: Coordinator) {
-        var coordinator = coordinator
+    public func present(_ coordinator: Coordinator) {
         coordinator.index = childCoordinators.count
         childCoordinators.append(coordinator)
         coordinator.start()
     }
     
-    public mutating func removeChild(_ coordinator: Coordinator?) {
+    public func removeChild(_ coordinator: Coordinator?) {
         guard let coordinator = coordinator else { return }
         
         for child in childCoordinators {
