@@ -28,12 +28,16 @@ extension Coordinator {
     public func removeChild(_ coordinator: Coordinator?) {
         guard let coordinator = coordinator else { return }
         
+        var arrayIndex = 0
         for child in childCoordinators {
             if child.index == coordinator.index {
                 if let index = coordinator.index {
                     childCoordinators.remove(at: index)
+                    return
                 }
             }
+            
+            arrayIndex += 1
         }
     }
 }
