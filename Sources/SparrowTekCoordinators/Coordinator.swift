@@ -12,7 +12,7 @@ public protocol Coordinator: class, Presentable {
     
     var router: FlowRouterType { get }
     var childCoordinators: [Coordinator] { get set }
-    var index: Int? { get set }
+    var id: UUID? { get set }
     
     init(router: FlowRouterType)
     func start()
@@ -20,7 +20,7 @@ public protocol Coordinator: class, Presentable {
 
 extension Coordinator {
     public func present(_ coordinator: Coordinator) {
-        coordinator.index = childCoordinators.count
+        coordinator.id = UUID()
         childCoordinators.append(coordinator)
         coordinator.start()
     }
@@ -28,16 +28,14 @@ extension Coordinator {
     public func removeChild(_ coordinator: Coordinator?) {
         guard let coordinator = coordinator else { return }
         
-        var arrayIndex = 0
+        var index = 0
         for child in childCoordinators {
-            if child.index == coordinator.index {
-                if let index = coordinator.index {
-                    childCoordinators.remove(at: index)
-                    return
-                }
+            if child.id == coordinator.id {
+                childCoordinators.remove(at: index)
+                return
             }
             
-            arrayIndex += 1
+            index += 1
         }
     }
 }
