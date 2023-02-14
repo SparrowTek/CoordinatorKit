@@ -1,4 +1,4 @@
-# SparrowTekCoordinators
+# CoordinatorKit
 
 This framework helps enable an MVVM-C design pattern and architecture in iOS applications.
 Model - View - View Model - Coordinator

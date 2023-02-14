@@ -1,6 +1,6 @@
 //
 //  FlowRouter.swift
-//  Avocadough
+//  SparrowTek
 //
 //  Created by Thomas Rademaker on 3/17/19.
 //  Copyright © 2019 SparrowTek LLC. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol FlowRouterType: class, Presentable {
+public protocol FlowRouterType: AnyObject, Presentable {
     var navigationController: UINavigationController { get }
     var rootViewController: UIViewController? { get }
     func present(_ module: Presentable, animated: Bool)
@@ -54,11 +54,9 @@ final public class FlowRouter: NSObject, FlowRouterType, UINavigationControllerD
         let controller = module.toPresentable()
         
         // Avoid pushing UINavigationController onto stack
-        guard controller is UINavigationController == false else {
-            return
-        }
+        guard controller is UINavigationController == false else { return }
         
-        if let completion = completion {
+        if let completion {
             completions[controller] = completion
         }
         
@@ -92,14 +90,12 @@ final public class FlowRouter: NSObject, FlowRouterType, UINavigationControllerD
     
     
     // MARK: Presentable
-    
     public func toPresentable() -> UIViewController {
         return navigationController
     }
     
     
     // MARK: UINavigationControllerDelegate
-    
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         // This is to help with the back swiping of SwipeNavigationController
         if let swipeNavController = navigationController as? SwipeNavigationController {
@@ -107,10 +103,7 @@ final public class FlowRouter: NSObject, FlowRouterType, UINavigationControllerD
         }
         
         // Ensure the view controller is popping
-        guard let poppedViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
-            !navigationController.viewControllers.contains(poppedViewController) else {
-                return
-        }
+        guard let poppedViewController = navigationController.transitionCoordinator?.viewController(forKey: .from), !navigationController.viewControllers.contains(poppedViewController) else { return }
         
         runCompletion(for: poppedViewController)
     }

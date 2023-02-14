@@ -1,9 +1,9 @@
 //
 //  AvoNavigationController.swift
-//  Avocadough
+//  SparrowTek
 //
 //  Created by SparrowTek on 4/30/19.
-//  Copyright © 2019 Avocadough. All rights reserved.
+//  Copyright © 2019 SparrowTek. All rights reserved.
 //
 
 import UIKit
