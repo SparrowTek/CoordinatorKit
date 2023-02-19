@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 public protocol Coordinator: AnyObject, Presentable {
     var router: FlowRouterType { get }
     var childCoordinators: [Coordinator] { get set }
